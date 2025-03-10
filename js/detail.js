@@ -21,11 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     })
                     .then(data => {
                         const primaryType = data.types[0].type.name;
-                        const typeColor = pokemonTypeColors[primaryType.toLowerCase()] || '#ff4444'; // Default to red if type not found
+                        const typeColor = pokemonTypeColors[primaryType.toLowerCase()] || '#ff4444'; 
 
                         const detailContainer = document.createElement('div');
                         detailContainer.className = 'pokemon-detail';
-                        detailContainer.style.backgroundColor = typeColor; // Set background color based on Pokémon type
+                        detailContainer.style.backgroundColor = typeColor; 
 
                         fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`)
                             .then(response => {
@@ -54,8 +54,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                             <section class="about-section">
                                                 <h2>About</h2>
                                                 <div class="about-details">
-                                                    <p>Weight: ${data.weight / 10} kg</p>
-                                                    <p>Height: ${data.height / 10} m</p>
+                                                    <p>  Weight: ${data.weight / 10} kg</p>
+                                                    <p> ${data.height / 10} m <br> Height</p>
                                                     <p>Abilities: ${data.abilities.map(ability => ability.ability.name).join(', ')}</p>
                                                 </div>
                                                 <p>${description.replace(/\n/g, ' ')}</p>
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 ${data.stats.map(stat => `
                                                     <div class="stat-row">
                                                         <span>${stat.stat.name.toUpperCase()}: ${stat.base_stat}</span>
-                                                        <meter value="${stat.base_stat}" max="255" style="background: ${typeColor};"></meter>
+                                                        <meter value="${stat.base_stat}" max="300" style="border: ${typeColor};"></meter>
                                                     </div>
                                                 `).join('')}
                                             </section>
@@ -75,10 +75,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
                                 document.body.appendChild(detailContainer);
                             })
-                            .catch(error => console.error('Error fetching Pokémon species:', error));
+                            
                     })
-                    .catch(error => console.error('Error fetching Pokémon details:', error));
+                   
             })
-            .catch(error => console.error('Error fetching Pokémon types:', error));
+            .catch(error => {
+                console.error(error);
+            });
     }
 });
